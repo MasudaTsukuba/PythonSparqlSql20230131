@@ -1,0 +1,11 @@
+{
+  "mapping1":{
+    "uri": "uri, uri",
+    "sparql": "select ?s ?o where { ?s <http://example.org/played_by> ?o. }",
+    "sql": "select name, cast from movie;"
+  },
+  "mapping2":{
+    "sparql": "Python Developers",
+    "sql": 650
+  }
+}
