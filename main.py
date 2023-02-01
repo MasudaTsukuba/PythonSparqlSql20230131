@@ -1,16 +1,25 @@
+import csv
+
 from DataBaseClass import DataBase
 from MappingClass import Mapping
 from SparqlClass import Sparql
 from UriClass import Uri
 from SparqlQueryClass import SparqlQueryClass
+from SqlClass import SqlClass
+from SparqlDirectQueryClass import SparqlDirectQueryClass
+from OutputClass import Output
 
-db = DataBase()
-db_name = 'db/data1.db'
-db.connect(db_name)
+# set up mapping data
+map_class = Mapping('mapping/mapping.json')
 
-results = db.execute('SELECT * FROM movie')
+# set up database
+db = DataBase('db/data1.db')
 
-db.close()
+sparql_query = SparqlQueryClass('sparql/query.json')  # set up sparql query
+sparql_query.convert_to_sql(map_class)  # convert uri to literals
 
-sparql_query_instance = SparqlQueryClass()
-sparql_query_instance.read_csv()
+sql = SqlClass()
+exe_query = sql.convert(sparql_query.var_list, sparql_query.sql_query)  # sparql to sql
+results, headers = db.execute(exe_query)  # execute sql query
+
+output = Output(results, headers, sparql_query.trans_uri_list)

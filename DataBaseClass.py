@@ -2,9 +2,10 @@ import sqlite3
 
 
 class DataBase:
-    def __init__(self):
+    def __init__(self, db_name):
         self.conn = None
         self.cur = None
+        self.connect(db_name)
 
     def connect(self, db_name):
         self.conn = sqlite3.connect(db_name)
@@ -14,8 +15,10 @@ class DataBase:
         self.conn.close()
 
     def execute(self, sql):
-        self.cur.execute(sql)
-        return_list = []
-        for row in self.cur:
-            return_list.append(row)
-        return return_list
+        return_list = self.cur.execute(sql).fetchall()
+        # return_list = []
+        # for row in self.cur:
+        #     return_list.append(row)
+        headers = [col[0] for col in self.cur.description]
+        results = [list(i) for i in return_list[1:]]
+        return results, headers
