@@ -1,0 +1,9 @@
+,Unnamed: 0,s_id,mo_id,t_id,datetime,s_id_uri,t_id_uri
+0,0,1,1,1,2009/10/20T10:00,http://example.com/schedule/1,http://example.com/theater/1
+1,1,2,1,1,2009/10/21T12:00,http://example.com/schedule/2,http://example.com/theater/1
+2,2,3,1,3,2009/10/20T09:30,http://example.com/schedule/3,http://example.com/theater/3
+3,3,4,2,1,2009/10/20T10:00,http://example.com/schedule/4,http://example.com/theater/1
+4,4,5,2,3,2009/10/20T18:00,http://example.com/schedule/5,http://example.com/theater/3
+5,5,6,3,1,2009/10/20T10:00,http://example.com/schedule/6,http://example.com/theater/1
+6,6,7,3,1,2009/10/20T12:30,http://example.com/schedule/7,http://example.com/theater/1
+7,7,8,3,3,2009/10/20T14:00,http://example.com/schedule/8,http://example.com/theater/3

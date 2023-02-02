@@ -1,11 +1,39 @@
 import csv
+import os
+import pandas as pd
 
 
 class Uri:
     def __init__(self):
-        self.dictionary = {'Q191543': 'ターミネーター4'}
+        self.dictionary = {}
         self.inverse_dictionary = None
+        self.dictionaries = {}  # bundle of dictionaries
+        self.inverse_dictionaries = {}
         pass
+
+    def read_dictionaries(self):
+        path = 'URI/'
+        files = os.listdir(path)
+        for file in files:
+            table = file.replace('.csv', '')
+            df = pd.read_csv(path+file, header=None)
+            for pair in df.iterrows():
+                key = pair[1][0]
+                value = pair[1][1]
+                try:
+                    self.dictionaries[table][key] = value
+                except KeyError:
+                    self.dictionaries[table] = {}
+                    self.dictionaries[table][key] = value
+                    pass
+                try:
+                    self.inverse_dictionaries[table][value] = key
+                except KeyError:
+                    self.inverse_dictionaries[table] = {}
+                    self.inverse_dictionaries[table][value] = key
+                    pass
+                pass
+            pass
 
     def invert_dictionary(self):
         self.inverse_dictionary = {}
